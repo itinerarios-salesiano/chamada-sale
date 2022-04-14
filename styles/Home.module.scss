@@ -1,0 +1,75 @@
+@import './variables.scss';
+
+.container {
+  background: #FF512F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, $primary, $secondary);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, $primary, $secondary); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.main {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 1fr auto;
+
+}
+
+.content{
+  display: grid;
+  place-items: center;
+  .mainLogo{
+   margin: auto;
+   height: 30vh;
+  }
+}
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2em;
+  background-color: $white;
+  justify-content: center;
+  align-items: center;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  text-align: center;
+  font-size: 4rem;
+  a {
+    color: $white;
+    text-decoration: none;
+    transition: .3s ease;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}
+.description {
+  margin: 4rem 0;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
