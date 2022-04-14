@@ -1,0 +1,18 @@
+@import './../../styles/variables.scss';
+
+.navbar{
+  display: grid;
+  grid-template-columns: auto 1fr ;
+  padding: 2em;
+  background-color: $white;
+  border-bottom: 1px solid $primary;
+}
+.logo{
+  font-size: 3rem;
+}
+.items{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1em;
+}

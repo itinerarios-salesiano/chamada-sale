@@ -1,0 +1,93 @@
+@import "../../styles/variables.scss";
+
+.button {
+  padding: 1em 2em;
+  border-radius: 0.7em;
+  border: none;
+  color: white;
+  background-color: $primary;
+  font-weight: 500;
+  font-size: 1.2em;
+  transition: 0.2s;
+  cursor: pointer;
+  align-self: center;
+  display: grid;
+  &.hasIcon {
+    grid-template-columns: auto 1fr;
+  }
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 0.2s;
+  margin-bottom: 2em;
+  margin-top: 1em;
+
+
+  &.large {
+    width: 100%;
+    height: 70px;
+    
+  }
+  &.small {
+    padding: 0.5em 1em;
+    margin: 0;
+  }
+
+  svg {
+    fill: $white;
+  }
+  &:hover {
+    filter: drop-shadow(0 10px 34px $primary);
+  }
+
+  &.active {
+    background-color: darken($primary, 10%);
+  }
+  &.dark {
+    background-color: transparent;
+    color: $primary;
+    svg {
+      fill: $primary;
+    }
+    &:hover {
+      background-color: $black;
+      filter: none;
+    }
+  }
+  &.white {
+    background-color: white;
+    border: 1px solid #eee;
+    color: $primary;
+    svg {
+      fill: $primary;
+    }
+    &:hover {
+      background-color: darken($white, 3%);
+      filter: none;
+    }
+    &.active{
+      background: darken($white, 3%);
+      color: white;
+      // draw a little circle on the bottom of the button
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $primary;
+        // center the circle
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 280px){
+  .button{
+    font-size: 1em;
+  }
+}

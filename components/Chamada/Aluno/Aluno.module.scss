@@ -1,0 +1,17 @@
+.aluno {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  place-items: center;
+  max-width: 300px;
+  background-color: #ccc;
+  padding: 2rem;
+  .alunoImage {
+    img {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background-color: #fff;
+      margin-right: 10px;
+    }
+  }
+}
