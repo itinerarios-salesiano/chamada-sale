@@ -1,17 +1,26 @@
 .aluno {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto;
   place-items: center;
   max-width: 300px;
-  background-color: #ccc;
-  padding: 2rem;
+  background-color: #1E2834;
+  overflow: hidden;
+  border-radius: 20px;
   .alunoImage {
     img {
-      width: 75px;
-      height: 75px;
+      width: 125px;
+      height: 125px;
       border-radius: 50%;
-      background-color: #fff;
+      border: 2.5px solid #fff;
+      transform: scale(.9) translateZ(50px);      background-color: #fff;
       margin-right: 10px;
     }
+    background-color: #4680f5;
+    padding: 2rem;
   }
+  .alunoInfo{
+    text-align: center;
+    color: rgb(227, 221, 221);
+  }
+ 
 }
