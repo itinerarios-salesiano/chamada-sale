@@ -4,7 +4,7 @@ export default function Aluno({ aluno }) {
   return (
     <div className={styles.aluno}>
 
-       <div className={styles.alunoImage}>
+       <div className={styles.alunoImage} id={aluno.nome} onClick={changeState()}>
         <img src={aluno.image} alt={aluno.nome} />
        </div>
 
