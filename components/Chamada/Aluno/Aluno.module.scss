@@ -1,3 +1,4 @@
+@import '../../../styles/variables.scss';
 .aluno {
   display: grid;
   grid-template-columns: auto;
@@ -15,7 +16,10 @@
       transform: scale(.9) translateZ(50px);      background-color: #fff;
       margin-right: 10px;
     }
-    background-color: #4680f5;
+    background-color: $alunoimgNormal;
+    &.alunoImgClicked{
+      background-color: red;
+    }
     padding: 2rem;
   }
   .alunoInfo{

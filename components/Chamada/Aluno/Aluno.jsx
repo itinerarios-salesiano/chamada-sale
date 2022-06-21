@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import styles from './Aluno.module.scss';
 
-export default function Aluno({ aluno }) {
-  return (
-    <div className={styles.aluno}>
+export default function Aluno({ aluno, handleFault }) {
 
-       <div className={styles.alunoImage} id={aluno.nome} onClick={changeState()}>
+  const [clicked, setClicked] = useState(false);
+  const handleClick = () => {
+    
+    if(handleFault && typeof handleFault === 'function'){
+      handleFault(aluno, !clicked);
+    }
+    setClicked(!clicked)
+  }
+  
+  return (
+    <div className={styles.aluno} onClick={handleClick}>
+
+       <div className={`${styles.alunoImage} ${clicked && styles.alunoImgClicked}`} id={aluno.nome}>
         <img src={aluno.image} alt={aluno.nome} />
        </div>
 
