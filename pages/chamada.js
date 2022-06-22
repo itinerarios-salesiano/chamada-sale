@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Aluno from "../components/Chamada/Aluno/Aluno";
 import ListaAlunos from "../components/Chamada/ListaAlunos/ListaAlunos";
 import Navbar from "../components/Navbar/Navbar";
@@ -14,30 +15,41 @@ export default function Chamada() {
     },
   ];
 
-  const alunos = [
+  let alunos = [
     {
       nome: 'João',
       matricula: '12345',
-
       image: 'https://picsum.photos/200/300',
+      presence:true,
     },
     {
       nome: 'Maria',
       matricula: '54321',
       image: 'https://picsum.photos/200/300',
+      presence:true,
+
     },
     {
       nome: 'José',
       matricula: '98765',
       image: 'https://picsum.photos/200/300',
+      presence:true,
+
     },
   ];
-
+  function handleFaultFunc(matricula, state){
+    let aluno = alunos.filter((item)=>{
+      if(item.matricula == matricula){return item}
+    })
+    let pos = alunos.indexOf(aluno)
+    aluno[0].presence = state;
+    alunos[pos] = aluno;
+  }
   return (
     <div>
       <Navbar title={"Site"} items={items} />
       <h1>Chamada</h1>
-      <ListaAlunos alunos={alunos} />
+      <ListaAlunos alunos={alunos} handleFault={handleFaultFunc} />
     </div>
   )
 }

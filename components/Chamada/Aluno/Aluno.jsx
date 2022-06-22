@@ -7,7 +7,7 @@ export default function Aluno({ aluno, handleFault }) {
   const handleClick = () => {
     
     if(handleFault && typeof handleFault === 'function'){
-      handleFault(aluno, !clicked);
+      handleFault(aluno.matricula, !clicked);
     }
     setClicked(!clicked)
   }

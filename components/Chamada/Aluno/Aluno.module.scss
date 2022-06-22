@@ -18,7 +18,7 @@
     }
     background-color: $alunoimgNormal;
     &.alunoImgClicked{
-      background-color: red;
+      background-color: $alunoimgfaltaColor;
     }
     padding: 2rem;
   }
