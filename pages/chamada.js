@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Aluno from "../components/Chamada/Aluno/Aluno";
+import Calendary from "../components/Chamada/Calendary/Calendary";
 import ListaAlunos from "../components/Chamada/ListaAlunos/ListaAlunos";
 import Navbar from "../components/Navbar/Navbar";
 
@@ -80,17 +81,23 @@ export default function Chamada() {
   function editChamadaOfDay(matricula, changes){
     setAlunoChamadaOfDay(matricula, changes)
   }
+  function getDayChamada(aluno){
+    return aluno.days.filter((item) => {
+      return item.day === todayString;
+    });;
+  }
+
+  function editAlunoPresence(aluno, dayChamada, presence, day_index){
+    dayChamada[0].presence = presence;
+    aluno.days[day_index] = dayChamada;
+    return aluno;
+  }
   function handleFaultFunc(matricula, state) {
     let aluno = getAluno(matricula)
-    let dayChamada = aluno.days.filter((item) => {
-      return item.day === todayString;
-    });
-    console.log(dayChamada)
+    let dayChamada = getDayChamada(aluno)
     let daypos = aluno.days.indexOf(dayChamada);
-    dayChamada[0].presence = !state;
-    aluno.days[daypos] = dayChamada;
-    editChamadaOfDay(matricula, aluno)
-    console.log(aluno)
+    let editedAlunoPresence = editAlunoPresence(aluno, dayChamada, !state, daypos);
+    editChamadaOfDay(matricula, editedAlunoPresence)
   }
   if (typeof window !== 'undefined') {
     // Perform localStorage action
@@ -101,6 +108,7 @@ export default function Chamada() {
       <Navbar title={"Site"} items={items} />
       <h1>Chamada</h1>
       <ListaAlunos alunos={exampleList} handleFault={handleFaultFunc} />
+      <Calendary/>
     </div>
   );
 }
