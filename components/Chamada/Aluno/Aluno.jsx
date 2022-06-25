@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import styles from './Aluno.module.scss';
 
-export default function Aluno({ aluno, handleFault }) {
+export default function Aluno({ aluno, handleFault, presence }) {
 
-  const [clicked, setClicked] = useState(false);
+  async function getPresence() {
+    let alunoPresence = await presence;
+    return alunoPresence;
+  }
+  const [clicked, setClicked] = useState(!getPresence());
   const handleClick = () => {
     
     if(handleFault && typeof handleFault === 'function'){
-      handleFault(aluno.matricula, !clicked);
+      handleFault(aluno.id, !clicked);
     }
     setClicked(!clicked)
   }

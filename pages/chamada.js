@@ -5,8 +5,6 @@ import ListaAlunos from "../components/Chamada/ListaAlunos/ListaAlunos";
 import Navbar from "../components/Navbar/Navbar";
 
 export default function Chamada() {
-  let today = new Date();
-  let todayString = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
   const items = [
     {
       name: "Home",
@@ -18,97 +16,105 @@ export default function Chamada() {
     },
   ];
 
-  function getAluno(matricula){
-    
-    if(!localStorage.getItem(matricula)){
-        return exampleList.filter(item => item.matricula === matricula)[0];
-    }
-    return JSON.parse(localStorage.getItem(matricula));
-  }
   
-  let exampleList = [
+  let exampleListAlunos = [
     {
+      id: "12345",
       nome: "João",
-      matricula: "12345",
       image: "https://picsum.photos/200/300",
-      days:[
-        {
-          day: todayString,
-          presence: true,
-        },
-        {
-          day: "2022-01-01",
-          presence: true,
-        }
-      ]
+
     },
     {
+      id: "54321",
       nome: "Maria",
-      matricula: "54321",
       image: "https://picsum.photos/200/300",
-      days:[
-        {
-          day: todayString,
-          presence: true,
-        },
-        {
-          day: "2022-01-01",
-          presence: true,
-        }
-      ]
     },
     {
+      id: "98765",
       nome: "José",
-      matricula: "98765",
       image: "https://picsum.photos/200/300",
-      days:[
-        {
-          day: todayString,
-          presence: true,
-        },
-        {
-          day: "2022-01-01",
-          presence: true,
-        }
-      ]
     },
   ];
-  function setAlunoChamadaOfDay(matricula, changes) {
-    localStorage.setItem(matricula, JSON.stringify(changes));
+  let datas =[
+    {
+      id: "0",
+      date: new Date("2022, 06, 25"),
+      presence:{
+        "12345": true,
+        "54321": true,
+        "98765": true,
+      },
+    },
+    {
+      id: "01",
+      date: new Date("2022, 06, 26"),
+      presence:{
+        "12345": true,
+        "54321": true,
+        "98765": true,
+      },
+    },
+    {
+      id: "02",
+      date: new Date("2022, 06, 27"),
+      presence:{
+        "12345": true,
+        "54321": true,
+        "98765": true,
+      },
+    },
+  ]
+  function setChamadaOfDay(dayId, changes) {
+    localStorage.setItem(dayId, JSON.stringify(changes));
+  }
+  
+  function editChamadaOfDay(dayID, changes){
+    setChamadaOfDay(dayID, changes)
+  }
+  async function getDataID(selectdate){
+    selectdate = await selectdate;
+    let id = datas.find(data => data.date.toDateString() === selectdate)
+    return id.id
   }
 
+  function getChamadaOnLocalStorage(id){
+    let chamada = localStorage.getItem(id) || datas.find(data => data.id === id)
+    return chamada
+  }
+  function getSelectedDate(){
+    // useState(new Date())
+    
+    return new Promise((resolve, reject) => {
+      window.addEventListener("load", () => {
+        let selectedDate = document.getElementById("calendary").value;
+        resolve(selectedDate)
+      })});
+  }
+  async function getDayChamada(){
+    let selectdate = getSelectedDate()
+    let dataID =  getDataID( await selectdate);
+    return getChamadaOnLocalStorage(dataID)
+  }
 
-  function editChamadaOfDay(matricula, changes){
-    setAlunoChamadaOfDay(matricula, changes)
+  function editAlunoPresence(id, dayChamada, presence){
+    let presenceOfTheDay = dayChamada[0].presence;
+    presenceOfTheDay[id] = presence;
+    return dayChamada;
   }
-  function getDayChamada(aluno){
-    return aluno.days.filter((item) => {
-      return item.day === todayString;
-    });;
-  }
-
-  function editAlunoPresence(aluno, dayChamada, presence, day_index){
-    dayChamada[0].presence = presence;
-    aluno.days[day_index] = dayChamada;
-    return aluno;
-  }
-  function handleFaultFunc(matricula, state) {
-    let aluno = getAluno(matricula)
-    let dayChamada = getDayChamada(aluno)
-    let daypos = aluno.days.indexOf(dayChamada);
-    let editedAlunoPresence = editAlunoPresence(aluno, dayChamada, !state, daypos);
-    editChamadaOfDay(matricula, editedAlunoPresence)
-  }
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    const item = localStorage.getItem('key')
+  async function handleFaultFunc(Alunoid, state) {
+    console.log('oi')
+    let dayChamada = await getDayChamada()
+    console.log('oi 2')
+    let dayId = dayChamada[0].id;
+    let editedAlunoPresence = editAlunoPresence(Alunoid, dayChamada, !state);
+    editChamadaOfDay(dayId, editedAlunoPresence)
   }
   return (
     <div>
       <Navbar title={"Site"} items={items} />
       <h1>Chamada</h1>
-      <ListaAlunos alunos={exampleList} handleFault={handleFaultFunc} />
-      <Calendary/>
+      <ListaAlunos alunos={exampleListAlunos} handleFault={handleFaultFunc} chamadaDayID={getDataID(getSelectedDate())}/>
+      <Calendary dates={datas}/>
     </div>
   );
 }
