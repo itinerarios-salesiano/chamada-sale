@@ -3,15 +3,15 @@ import styles from "./ListaAlunos.module.scss";
 
 export default function ListaAlunos({ alunos, handleFault, chamadaDayID }) {
 
-  function getAlunoPresence(alunoId){
-    //wait window load and get presence boleaan on local storege
+  async function getAlunoPresence(alunoId){
+    let dayID = await chamadaDayID;
     return new Promise((resolve, reject) => {
-      window.addEventListener('load', () => {
-        let chamada = localStorage.getItem(chamadaDayID);
-        let presence = chamada ? chamada.presence[alunoId] : true;
-        resolve(presence);
-      });
-    });
+      setTimeout(() => {
+        let chamada = localStorage.getItem(dayID);
+        let presence = chamada ? JSON.parse(chamada).presence[`${alunoId}`] : true;
+        resolve(presence);      
+    }, 1000);
+  })
   }
   return (
     <div className={styles.alunosList}>

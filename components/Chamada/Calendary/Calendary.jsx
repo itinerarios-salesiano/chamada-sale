@@ -7,7 +7,7 @@ export default function Calendary({ dates }) {
       <select id="calendary" className={styles.calendarySelect}>
         {dates.map((data) => {
             let dateStr = data.date.toDateString()
-            return(<option key={dateStr}value={dateStr}>{dateStr} </option>)
+            return(<option key={dateStr} value={dateStr}>{dateStr} </option>)
         })}
       </select>
     </div>

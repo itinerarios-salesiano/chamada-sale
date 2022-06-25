@@ -46,7 +46,7 @@ export default function Chamada() {
       },
     },
     {
-      id: "01",
+      id: "1",
       date: new Date("2022, 06, 26"),
       presence:{
         "12345": true,
@@ -55,7 +55,7 @@ export default function Chamada() {
       },
     },
     {
-      id: "02",
+      id: "2",
       date: new Date("2022, 06, 27"),
       presence:{
         "12345": true,
@@ -73,39 +73,38 @@ export default function Chamada() {
   }
   async function getDataID(selectdate){
     selectdate = await selectdate;
-    let id = datas.find(data => data.date.toDateString() === selectdate)
-    return id.id
+    let thisDate = datas.find(data => data.date.toDateString() === selectdate);
+    return thisDate.id;
   }
 
   function getChamadaOnLocalStorage(id){
-    let chamada = localStorage.getItem(id) || datas.find(data => data.id === id)
+    
+    let chamada = localStorage.getItem(id) ? JSON.parse(localStorage.getItem(id)) : datas.find(data => data.id === id);
     return chamada
   }
-  function getSelectedDate(){
-    // useState(new Date())
-    
+  async function getSelectedDate(){
     return new Promise((resolve, reject) => {
-      window.addEventListener("load", () => {
-        let selectedDate = document.getElementById("calendary").value;
-        resolve(selectedDate)
-      })});
-  }
+      setTimeout(() => {
+        resolve(document.getElementById("calendary").value)
+      
+    }, 1000);
+  })
+}
   async function getDayChamada(){
-    let selectdate = getSelectedDate()
-    let dataID =  getDataID( await selectdate);
+    let selectdate = await getSelectedDate()
+    let dataID =  await getDataID(selectdate);
+    console.log(dataID)
     return getChamadaOnLocalStorage(dataID)
   }
 
   function editAlunoPresence(id, dayChamada, presence){
-    let presenceOfTheDay = dayChamada[0].presence;
+    let presenceOfTheDay = dayChamada.presence;
     presenceOfTheDay[id] = presence;
     return dayChamada;
   }
   async function handleFaultFunc(Alunoid, state) {
-    console.log('oi')
     let dayChamada = await getDayChamada()
-    console.log('oi 2')
-    let dayId = dayChamada[0].id;
+    let dayId = dayChamada.id;
     let editedAlunoPresence = editAlunoPresence(Alunoid, dayChamada, !state);
     editChamadaOfDay(dayId, editedAlunoPresence)
   }
