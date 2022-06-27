@@ -10,7 +10,7 @@ export default function ListaAlunos({ alunos, handleFault, chamadaDayID }) {
         let chamada = localStorage.getItem(dayID);
         let presence = chamada ? JSON.parse(chamada).presence[`${alunoId}`] : true;
         resolve(presence);      
-    }, 1000);
+    }, 1);
   })
   }
   return (
