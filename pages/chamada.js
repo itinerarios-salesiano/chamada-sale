@@ -94,7 +94,6 @@ export default function Chamada() {
   async function getDayChamada(){
     let selectdate = await getSelectedDate()
     let dataID =  await getDataID(selectdate);
-    console.log(dataID)
     return getChamadaOnLocalStorage(dataID)
   }
 
@@ -108,8 +107,8 @@ export default function Chamada() {
     let dayId = dayChamada.id;
     let editedAlunoPresence = editAlunoPresence(Alunoid, dayChamada, !state);
     editChamadaOfDay(dayId, editedAlunoPresence)
-    
   }
+
   return (
     <div>
       <Navbar title={"Site"} items={items} />
