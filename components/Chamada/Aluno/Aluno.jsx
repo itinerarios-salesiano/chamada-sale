@@ -3,12 +3,8 @@ import styles from './Aluno.module.scss';
 
 export default function Aluno({ aluno, handleFault, presence }) {
 
-  async function getPresence() {
-    let alunoPresence = await presence;
-    return alunoPresence;
-
-  }
-  const [clicked, setClicked] = useState(getPresence());
+  const [clicked, setClicked] = useState(presence);
+  
   const handleClick = () => {
     
     if(handleFault && typeof handleFault === 'function'){

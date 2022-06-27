@@ -85,8 +85,9 @@ export default function Chamada() {
   async function getSelectedDate(){
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(document.getElementById("calendary").value)
-      
+        if(typeof window !== "undefined"){
+          resolve(document.getElementById("calendary").value)
+        }
     }, 1000);
   })
 }
@@ -107,6 +108,7 @@ export default function Chamada() {
     let dayId = dayChamada.id;
     let editedAlunoPresence = editAlunoPresence(Alunoid, dayChamada, !state);
     editChamadaOfDay(dayId, editedAlunoPresence)
+    
   }
   return (
     <div>
