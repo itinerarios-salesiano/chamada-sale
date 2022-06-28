@@ -5,7 +5,7 @@ import CreateDate from "../components/Chamada/Forms/CreateDate";
 import CreateStudent from "../components/Chamada/Forms/CreateStudent";
 import ListaAlunos from "../components/Chamada/ListaAlunos/ListaAlunos";
 import Navbar from "../components/Navbar/Navbar";
-
+import SaleButton from "../components/Button/Button";
 export default function Chamada() {
 
   const items = [
@@ -98,9 +98,7 @@ export default function Chamada() {
     <div>
       <Navbar title={"Site"} items={items} />
       <h1>Chamada</h1>
-      <button onClick={() => {
-        setCreatingStudent(true)
-      }}> Add Aluno </button>
+      <SaleButton key={'addAluno'} type={'white'} size={'small'} onClick={() =>{setCreatingStudent(true)}}>{'Add aluno'}</SaleButton>
       <CreateStudent isOpen={creatingstudent} onConfirm={handleCreateStudent} />
       <ListaAlunos students={students} dates={dates} selectedDate={selectedDate} handleFault={handleFault} />
       <Calendary dates={dates} selectedDate={selectedDate} setSelectedDate={handleSelectDate} addDate={() => {
