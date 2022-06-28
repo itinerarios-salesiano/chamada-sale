@@ -2,24 +2,67 @@
 
 .calendaryDiv {
   display: flex;
-  grid-template-columns: 1fr;
   justify-content: center;
-  place-items: center;
-  .calendarySelect{
-    border-radius: 15px;
-    border-color: $secondary;
+  align-items: center;
+  gap: 10px;
+  .calendaryDate{
+    justify-content: center;
+    align-items: center;
+    
     background-color: $white;
     color: $black;
-    padding: .5rem;
-    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid $black;
+    font-size: 1.5rem;
     font-weight: bold;
-    outline: none;
-    transition: ease-in-out 50ms;
-    &:hover{
-      background-color: $secondary;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: grid ;
+    grid-template-columns: 1fr auto ;
+    gap: 20px;
+    &:hover {
+      background-color: #eee;
+    }
+    &.calendaryDateClicked{
+      background-color: black;
       color: $white;
     }
-    
   }
 
+}
+.addDate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary;
+  color: $white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $secondary;
+  }
+}
+.removeDate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $alunoimgfaltaColor;
+  color: $white;
+  font-size: .5rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $white;
+    color: $alunoimgfaltaColor;
+  }
 }
